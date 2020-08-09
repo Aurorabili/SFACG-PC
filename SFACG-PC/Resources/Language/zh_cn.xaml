@@ -10,23 +10,15 @@
     </sys:String>
 
     <sys:String x:Key="i18n.LoginDialogTitle" xml:space="preserve">登录</sys:String>
-
     <sys:String x:Key="i18n.LoginDialogUsername" xml:space="preserve">用户名</sys:String>
-
     <sys:String x:Key="i18n.LoginDialogPassword" xml:space="preserve">密码</sys:String>
-
     <sys:String x:Key="i18n.LoginDialogLogin" xml:space="preserve">登录</sys:String>
-
     <sys:String x:Key="i18n.LoginDialogCancel" xml:space="preserve">取消</sys:String>
-
     <sys:String x:Key="i18n.MainLeftDrawerTitle" xml:space="preserve">菠萝包轻小说</sys:String>
-
     <sys:String x:Key="i18n.Homepage" xml:space="preserve">首页</sys:String>
-
-    <sys:String x:Key="i18n.BookShelf" xml:space="preserve">书架</sys:String>
-
-    <sys:String x:Key="i18n.BookViewer" xml:space="preserve">阅读</sys:String>
-
-    <sys:String x:Key="i18n.UserCenter" xml:space="preserve">个人中心</sys:String>
+    <sys:String x:Key="i18n.Bookshelf" xml:space="preserve">书架</sys:String>
+    <sys:String x:Key="i18n.Bookviewer" xml:space="preserve">阅读</sys:String>
+    <sys:String x:Key="i18n.Usercenter" xml:space="preserve">个人中心</sys:String>
+    <sys:String x:Key="i18n.Setting" xml:space="preserve">设置</sys:String>
 
 </ResourceDictionary>

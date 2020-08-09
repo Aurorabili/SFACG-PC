@@ -3,7 +3,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -162,6 +166,107 @@ namespace SFACGPC.Objects.Primitive {
                         }
                     };
                 }
+            }
+        }
+    }
+
+    public abstract class BindableBase : INotifyPropertyChanged {
+        /// <summary>
+        /// Multicast event for property change notifications.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Notifies listeners that a property value has changed.
+        /// </summary>
+        /// <param name="propertyName">Name of the property used to notify listeners.  This
+        /// value is optional and can be provided automatically when invoked from compilers
+        /// that support <see cref="CallerMemberNameAttribute"/>.</param>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Checks if a property already matches a desired value.  Sets the property and
+        /// notifies listeners only when necessary.
+        /// </summary>
+        /// <typeparam name="T">Type of the property.</typeparam>
+        /// <param name="storage">Reference to a property with both getter and setter.</param>
+        /// <param name="value">Desired value for the property.</param>
+        /// <param name="propertyName">Name of the property used to notify listeners.  This
+        /// value is optional and can be provided automatically when invoked from compilers that
+        /// support CallerMemberName.</param>
+        /// <returns>True if the value was changed, false if the existing value matched the
+        /// desired value.</returns>
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null) {
+            if (Equals(storage, value)) return false;
+
+            storage = value;
+            this.OnPropertyChanged(propertyName);
+            return true;
+        }
+    }
+
+    internal class DelegateCommand : ICommand {
+        private readonly Action _execute;
+
+        private readonly Func<bool> _canExecute;
+
+        /// <summary>
+        /// Initializes a new instance of the RelayCommand class that 
+        /// can always execute.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <exception cref="ArgumentNullException">If the execute argument is null.</exception>
+        public DelegateCommand(Action execute)
+            : this(execute, null) {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the RelayCommand class.
+        /// </summary>
+        /// <param name="execute">The execution logic.</param>
+        /// <param name="canExecute">The execution status logic.</param>
+        /// <exception cref="ArgumentNullException">If the execute argument is null.</exception>
+        public DelegateCommand(Action execute, Func<bool> canExecute) {
+            if (execute == null) {
+                throw new ArgumentNullException(nameof(execute));
+            }
+
+            this._execute = execute;
+            this._canExecute = canExecute;
+        }
+
+        /// <summary>
+        /// Occurs when changes occur that affect whether the command should execute.
+        /// </summary>
+        public event EventHandler CanExecuteChanged;
+
+        /// <summary>
+        /// Raises the <see cref="CanExecuteChanged" /> event.
+        /// </summary>
+        [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Justification = "This cannot be an event")]
+        public void RaiseCanExecuteChanged() {
+            this.CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Defines the method that determines whether the command can execute in its current state.
+        /// </summary>
+        /// <param name="parameter">This parameter will always be ignored.</param>
+        /// <returns>true if this command can be executed; otherwise, false.</returns>
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameter) {
+            return this._canExecute == null || this._canExecute();
+        }
+
+        /// <summary>
+        /// Defines the method to be called when the command is invoked. 
+        /// </summary>
+        /// <param name="parameter">This parameter will always be ignored.</param>
+        public void Execute(object parameter) {
+            if (this.CanExecute(parameter)) {
+                this._execute();
             }
         }
     }
