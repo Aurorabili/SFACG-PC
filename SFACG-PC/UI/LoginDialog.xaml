@@ -1,0 +1,73 @@
+﻿<UserControl
+    x:Class="SFACGPC.UI.LoginDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime"
+    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+    Width="399"
+    Height="239"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="16">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <TextBlock Text="{DynamicResource i18n.LoginDialogTitle}" />
+        <TextBox
+            x:Name="tb_username"
+            Grid.Row="1"
+            Margin="0,6,0,0"
+            wpf:HintAssist.Hint="{DynamicResource i18n.LoginDialogUsername}"
+            FontSize="18"
+            Style="{DynamicResource MaterialDesignFloatingHintTextBox}" />
+        <PasswordBox
+            x:Name="tb_password"
+            Grid.Row="2"
+            Margin="0,8,0,0"
+            materialDesign:HintAssist.Foreground="{DynamicResource MaterialDesignBody}"
+            wpf:HintAssist.Hint="{DynamicResource i18n.LoginDialogPassword}"
+            Cursor="IBeam"
+            FontSize="18"
+            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+        <StackPanel
+            Grid.Row="3"
+            Margin="0,16,0,0"
+            Orientation="Horizontal">
+            <Button
+                Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                Content="{DynamicResource i18n.LoginDialogLogin}"
+                IsDefault="True"
+                Style="{DynamicResource MaterialDesignFlatButton}" Click="Button_Click">
+                <Button.CommandParameter>
+                    <system:Boolean>True</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button
+                Margin="8,0,0,0"
+                Command="{x:Static wpf:DialogHost.CloseDialogCommand}"
+                Content="{DynamicResource i18n.LoginDialogCancel}"
+                IsCancel="True"
+                Style="{DynamicResource MaterialDesignFlatButton}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>
