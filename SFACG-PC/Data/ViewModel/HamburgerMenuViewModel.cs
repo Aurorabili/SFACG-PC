@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MaterialDesignThemes.Wpf;
+using PropertyChanged;
 using SFACGPC.Objects.Primitive;
 using SFACGPC.UI;
 using System;
@@ -9,7 +10,8 @@ using System.Text;
 using System.Windows;
 
 namespace SFACGPC.Data.ViewModel {
-    public class HamburgerMenuViewModel : BindableBase {
+    [AddINotifyPropertyChangedInterface]
+    public class HamburgerMenuViewModel {
         private static readonly ObservableCollection<HamburgerMenuPageItem> AppMenu = new ObservableCollection<HamburgerMenuPageItem>();
         private static readonly ObservableCollection<HamburgerMenuPageItem> AppOptionsMenu = new ObservableCollection<HamburgerMenuPageItem>();
 

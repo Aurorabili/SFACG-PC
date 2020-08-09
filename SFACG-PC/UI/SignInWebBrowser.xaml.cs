@@ -60,9 +60,15 @@ namespace SFACGPC.UI {
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
-            if (_sFCommunity != null && _session_ID != null)
+        private async void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+            if (_sFCommunity != null && _session_ID != null) {
                 Session.Current = Session.Parse(_sFCommunity, _session_ID);
+                await Session.Current.Store();
+
+                MainWindow view = new MainWindow();
+                view.Show();
+            }
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {

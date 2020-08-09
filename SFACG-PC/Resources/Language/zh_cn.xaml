@@ -20,5 +20,8 @@
     <sys:String x:Key="i18n.Bookviewer" xml:space="preserve">阅读</sys:String>
     <sys:String x:Key="i18n.Usercenter" xml:space="preserve">个人中心</sys:String>
     <sys:String x:Key="i18n.Setting" xml:space="preserve">设置</sys:String>
+    <sys:String x:Key="i18n.Lightnovel" xml:space="preserve">轻小说</sys:String>
+    <sys:String x:Key="i18n.Comics" xml:space="preserve">漫画</sys:String>
+    <sys:String x:Key="i18n.Dialoguenovel" xml:space="preserve">对话小说</sys:String>
 
 </ResourceDictionary>

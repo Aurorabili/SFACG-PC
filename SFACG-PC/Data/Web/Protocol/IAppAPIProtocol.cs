@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SFACGPC.Data.Web.Protocol {
-    [Headers("Authorization: Basic")]
+    [Headers("Authorization: Basic YW5kcm9pZHVzZXI6MWEjJDUxLXl0Njk7KkFjdkBxeHE=")]
     public interface IAppAPIProtocol {
         [Get("/specialpush")]
         Task<SpecialPushResponse> GetSpecialPushResponse();
@@ -22,7 +22,7 @@ namespace SFACGPC.Data.Web.Protocol {
         Task<NovelNewPushResponse> GetNovelNewPushResponse();
 
         [Get("/novels/{novelid}")]
-        Task<NovelInfoResponse> GetNovelInfoResponse(GetNovelInfo getNovelInfo);
+        Task<NovelInfoResponse> GetNovelInfoResponse([AliasAs("novelid")] string NovelID);
 
         [Get("/novels/{novelid}/dirs?expand=originNeedFireMoney")]
         Task<NovelDirResponse> GetNovelDirResponse([AliasAs("novelid")]string NovelID);

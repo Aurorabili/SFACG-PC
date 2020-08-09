@@ -46,4 +46,8 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UI\Style\" />
+  </ItemGroup>
+
 </Project>

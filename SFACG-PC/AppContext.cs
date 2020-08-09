@@ -15,7 +15,9 @@ namespace SFACGPC {
 
         public const string ConfigurationFileName = "SFACG_Config.json";
 
-        public static readonly string ProjectFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AppIdentifier.ToLower());
+        //public static readonly string ProjectFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AppIdentifier.ToLower());
+
+        public static readonly string ProjectFolder = System.IO.Directory.GetCurrentDirectory() + "\\UserConfig\\";
 
         public static readonly string ConfFolder = ProjectFolder;
 

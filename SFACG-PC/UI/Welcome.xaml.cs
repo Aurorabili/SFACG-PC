@@ -1,8 +1,10 @@
 ﻿using MaterialDesignThemes.Wpf;
 using SFACGPC.Data.ViewModel;
+using SFACGPC.Persisting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,12 +31,28 @@ namespace SFACGPC.UI {
             timer.Stop();
         }
         private async void UserLogin(object sender, EventArgs e) {
+            /* 
+             * 使用内置登录
             var View = new LoginDialog() {
                 DataContext = new User()
             };
 
             var result = await DialogHost.Show(View, "RootDialog");
             Console.WriteLine(result);
+            */
+            if (Session.ConfExists()) {
+                await Session.Restore();
+
+                MainWindow view = new MainWindow();
+                view.Show();
+            } else {
+                System.IO.FileStream f = System.IO.File.Create(Path.Combine(AppContext.ConfFolder, AppContext.ConfigurationFileName));
+                f.Close();
+                f.Dispose();
+                SignInWebBrowser signIn = new SignInWebBrowser();
+                signIn.Show();
+            }
+            this.Close();
         }
     }
 }

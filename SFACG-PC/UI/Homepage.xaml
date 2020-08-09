@@ -6,11 +6,77 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SFACGPC.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:SFACGPC.Data.ViewModel"
     Title="Homepage"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="580"
+    d:DesignWidth="870"
     Background="{DynamicResource MaterialDesignPaper}"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <viewModels:SpecialPushViewModel />
+    </Page.DataContext>
 
-    <Grid />
+    <Page.Resources>
+        <DataTemplate x:Key="BookCoverDataTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Border CornerRadius="15,15,15,15">
+                    <Image Source="{Binding Path=ImgUrl}" />
+                </Border>
+                <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Title}" />
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SpecialPushDataTemplate" DataType="{x:Type viewModels:SpecialPushItem}">
+            <Grid>
+                <Image Source="{Binding Path=ImgUrl}" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Margin="32,32,32,32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.6*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Controls:FlipView
+                x:Name="SpecialPushViewer"
+                Margin="0,0,5,0"
+                IsBannerEnabled="False"
+                ItemTemplate="{StaticResource SpecialPushDataTemplate}"
+                ItemsSource="{Binding SpecialPushItems}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="48" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                Margin="4"
+                Orientation="Horizontal">
+                <RadioButton
+                    Margin="4"
+                    Content="{DynamicResource i18n.Lightnovel}"
+                    Foreground="{DynamicResource MaterialDesignBody}"
+                    IsChecked="True"
+                    Style="{StaticResource MaterialDesignTabRadioButton}" />
+                <RadioButton
+                    Margin="4"
+                    Content="{DynamicResource i18n.Comics}"
+                    Foreground="{DynamicResource MaterialDesignBody}"
+                    IsChecked="False"
+                    Style="{StaticResource MaterialDesignTabRadioButton}" />
+                <RadioButton
+                    Margin="4"
+                    Content="{DynamicResource i18n.Dialoguenovel}"
+                    Foreground="{DynamicResource MaterialDesignBody}"
+                    IsChecked="False"
+                    Style="{StaticResource MaterialDesignTabRadioButton}" />
+            </StackPanel>
+            <ItemsControl
+                x:Name="HotPushViewer"
+                Grid.Row="1"
+                ItemTemplate="{StaticResource BookCoverDataTemplate}"
+                ItemsSource="{Binding HotPushItems}" />
+        </Grid>
+    </Grid>
 </Page>
