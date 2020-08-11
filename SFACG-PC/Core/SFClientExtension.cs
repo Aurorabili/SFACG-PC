@@ -1,5 +1,6 @@
 ﻿using SFACGPC.Data.ViewModel;
 using SFACGPC.Data.Web.Delegation;
+using SFACGPC.Data.Web.Response;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,18 @@ namespace SFACGPC.Core {
                 }));
             }
             return list;
+        }
+
+        public static async Task<List<NovelHotPushResponse>> GetNovelHotPush(this SFClient _) {
+            var result = await HttpClientFactory.AppApiService().GetNovelHotPushResponse();
+            var list = new List<HotPushItem>();
+            if (result is { } res) {
+                list.AddRange(res.data.Select(book=>new HotPushItem() {
+                    Imgurl = 
+                }))
+            }
+
+
         }
     }
 }

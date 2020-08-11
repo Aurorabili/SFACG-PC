@@ -12,16 +12,14 @@
     d:DesignWidth="870"
     Background="{DynamicResource MaterialDesignPaper}"
     mc:Ignorable="d">
-    <Page.DataContext>
-        <viewModels:SpecialPushViewModel />
-    </Page.DataContext>
 
     <Page.Resources>
-        <DataTemplate x:Key="BookCoverDataTemplate">
+        <DataTemplate x:Key="HotPushDataTemplate">
             <StackPanel Orientation="Horizontal">
                 <Border CornerRadius="15,15,15,15">
                     <Image Source="{Binding Path=ImgUrl}" />
                 </Border>
+                <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Title}" />
                 <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Title}" />
             </StackPanel>
         </DataTemplate>
@@ -42,7 +40,11 @@
                 Margin="0,0,5,0"
                 IsBannerEnabled="False"
                 ItemTemplate="{StaticResource SpecialPushDataTemplate}"
-                ItemsSource="{Binding SpecialPushItems}" />
+                ItemsSource="{Binding SpecialPushItems}">
+                <Controls:FlipView.DataContext>
+                    <viewModels:SpecialPushViewModel />
+                </Controls:FlipView.DataContext>
+            </Controls:FlipView>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
@@ -75,7 +77,7 @@
             <ItemsControl
                 x:Name="HotPushViewer"
                 Grid.Row="1"
-                ItemTemplate="{StaticResource BookCoverDataTemplate}"
+                ItemTemplate="{StaticResource HotPushDataTemplate}"
                 ItemsSource="{Binding HotPushItems}" />
         </Grid>
     </Grid>
