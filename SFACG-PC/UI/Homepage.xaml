@@ -14,13 +14,16 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Key="HotPushDataTemplate">
+        <DataTemplate x:Key="HotPushDataTemplate" DataType="{x:Type viewModels:HotPushItem}">
             <StackPanel Orientation="Horizontal">
                 <Border CornerRadius="15,15,15,15">
-                    <Image Source="{Binding Path=ImgUrl}" />
+                    <Image
+                        Width="110"
+                        Height="200"
+                        Source="{Binding Path=CoverUrl}" />
                 </Border>
                 <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Title}" />
-                <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Title}" />
+                <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Tags}" />
             </StackPanel>
         </DataTemplate>
         <DataTemplate x:Key="SpecialPushDataTemplate" DataType="{x:Type viewModels:SpecialPushItem}">
@@ -78,7 +81,11 @@
                 x:Name="HotPushViewer"
                 Grid.Row="1"
                 ItemTemplate="{StaticResource HotPushDataTemplate}"
-                ItemsSource="{Binding HotPushItems}" />
+                ItemsSource="{Binding HotPushItems}">
+                <ItemsControl.DataContext>
+                    <viewModels:HotPushViewModel />
+                </ItemsControl.DataContext>
+            </ItemsControl>
         </Grid>
     </Grid>
 </Page>

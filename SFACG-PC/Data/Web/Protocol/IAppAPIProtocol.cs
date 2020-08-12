@@ -15,13 +15,13 @@ namespace SFACGPC.Data.Web.Protocol {
         [Get("/novels/0/sysTags?filter=push")]
         Task<SysTagsResponse> GetSysTagsResponse();
 
-        [Get("/novels?size=8&filter=hotpush&expand=sysTags%2Cdiscount%2CdiscountExpireDate")]
+        [Get("/novels?size=8&filter=hotpush&expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,latestcommentdate,essaytag,auditCover")]
         Task<NovelHotPushResponse> GetNovelHotPushResponse();
 
-        [Get("/novels?size=8&filter=newpush&expand=sysTags%2Cdiscount%2CdiscountExpireDate")]
+        [Get("/novels?size=8&filter=newpush&expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,latestcommentdate,essaytag,auditCover")]
         Task<NovelNewPushResponse> GetNovelNewPushResponse();
 
-        [Get("/novels/{novelid}")]
+        [Get("/novels/{novelid}/expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,latestcommentdate,essaytag,auditCover")]
         Task<NovelInfoResponse> GetNovelInfoResponse([AliasAs("novelid")] string NovelID);
 
         [Get("/novels/{novelid}/dirs?expand=originNeedFireMoney")]

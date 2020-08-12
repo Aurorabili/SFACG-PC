@@ -1,13 +1,23 @@
 ﻿using Newtonsoft.Json;
+using SFACGPC.Data.Web.Response;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using static SFACGPC.Data.Web.Response.PublicBookInfoRespone;
 
 namespace SFACGPC.Objects.Primitive {
     public static class Strings {
+        public static string Tag2Str<T>(this T[] src) where T : Systag {
+            string result = null;
+            foreach (var item in src) {
+                result += item.tagName + '/';
+            }
+            return result;
+        }
+
         public static byte[] GetBytes(this string str, Encoding encoding = null) {
             return encoding == null ? Encoding.UTF8.GetBytes(str) : encoding.GetBytes(str);
         }
