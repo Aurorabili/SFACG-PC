@@ -1,6 +1,8 @@
-﻿using SFACGPC.Data.ViewModel;
+﻿using MaterialDesignThemes.Wpf;
+using SFACGPC.Data.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -40,8 +42,13 @@ namespace SFACGPC.UI {
             SpecialPushViewer.GoForward();
         }
 
-        private void Favorites_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID.ToString());
+        private async void Info_Click(object sender, RoutedEventArgs e) {
+
+            BookInfoViewModel bookinfo = new BookInfoViewModel();
+            await bookinfo.LoadData(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID.ToString());
+            BookInfoPage page = new BookInfoPage(bookinfo.BookInfo);
+            NavigationService.Navigate(page);
+
         }
         private void BeginRead_Click(object sender, RoutedEventArgs e) {
             MessageBox.Show(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID.ToString());

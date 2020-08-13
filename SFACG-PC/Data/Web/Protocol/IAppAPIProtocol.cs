@@ -25,7 +25,7 @@ namespace SFACGPC.Data.Web.Protocol {
         Task<ChatNovelPushResponse> GetChatNovelPushResponse();
 
         [Get("/novels/{novelid}?expand=chapterCount,bigBgBanner,bigNovelCover,typeName,intro,fav,ticket,pointCount,tags,sysTags,signlevel,discount,discountExpireDate,totalNeedFireMoney,originTotalNeedFireMoney,latestchapter,latestcommentdate,essaytag,auditCover")]
-        Task<NovelInfoResponse> GetNovelInfoResponse([AliasAs("novelid")] string NovelID);
+        Task<NovelInfoResponse> GetNovelInfoResponse([AliasAs("novelid")]string NovelID);
 
         [Get("/novels/{novelid}/dirs?expand=originNeedFireMoney")]
         Task<NovelDirResponse> GetNovelDirResponse([AliasAs("novelid")]string NovelID);
@@ -44,5 +44,8 @@ namespace SFACGPC.Data.Web.Protocol {
 
         [Get("/user/money")]
         Task<UserMoneyResponse> GetUserMoneyResponse();
+
+        [Get("/authors?authorId={authorid}&expand=youfollow%2CfansNum")]
+        Task<AuthorInfo> GetAuthorInfo([AliasAs("authorid")]string AuthorID);
     }
 }

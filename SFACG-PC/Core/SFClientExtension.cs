@@ -13,6 +13,26 @@ using static SFACGPC.Data.Web.Response.PublicBookInfo;
 namespace SFACGPC.Core {
     public static class SFClientExtension {
 
+        public static async Task<BookInfo> GetBookInfo(this SFClient _, string NovelID) {
+            var result = await HttpClientFactory.AppApiService().GetNovelInfoResponse(NovelID);
+            return new BookInfo() {
+                AuthorName = result.data.authorName,
+                ImgUrl = result.data.novelCover,
+                AuthorUrl = await GetAuthorAvatar(_, result.data.authorId),
+                Intro = result.data.expand.intro,
+                IsNeedVIP = result.data.signStatus.ToLower().IndexOf("vip") >= 0,
+                LatestString = result.data.expand.latestChapter.addTime.ToString() + "    " + result.data.expand.latestChapter.title,
+                MarkCount = result.data.markCount.ToString(),
+                Point = (int)(result.data.point / 2),
+                TicketCount = result.data.expand.ticket.ToString(),
+                Title = result.data.novelName,
+                TypeString = result.data.expand.typeName + "/" + ((!result.data.isFinish) ? "连载中" : "已完结")
+            };
+        }
+        public static async Task<string> GetAuthorAvatar(this SFClient _, int AuthorID) {
+            var result = await HttpClientFactory.AppApiService().GetAuthorInfo(AuthorID.ToString());
+            return result.data.avatar;
+        }
         public static async Task<List<SpecialPushItem>> GetComicsSpecialPush(this SFClient _) {
             var result = await HttpClientFactory.AppApiService().GetComicsSpecialPushResponse();
             var list = new List<SpecialPushItem>();

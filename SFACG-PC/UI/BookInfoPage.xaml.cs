@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SFACGPC.Data.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -16,8 +17,11 @@ namespace SFACGPC.UI {
     /// BookInfoPage.xaml 的交互逻辑
     /// </summary>
     public partial class BookInfoPage : Page {
-        public BookInfoPage() {
+        public BookInfoPage(BookInfo info) {
             InitializeComponent();
+
+            this.DataContext = info;
         }
+
     }
 }

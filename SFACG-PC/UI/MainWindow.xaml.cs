@@ -21,12 +21,11 @@ namespace SFACGPC.UI {
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : MetroWindow {
-        private readonly NavigationServiceEx navigationServiceEx;
-
+        private static readonly NavigationServiceEx _navigationServiceEx = new NavigationServiceEx();
+        public NavigationServiceEx navigationServiceEx => _navigationServiceEx;
         public MainWindow() {
             InitializeComponent();
 
-            this.navigationServiceEx = new NavigationServiceEx();
             this.navigationServiceEx.Navigated += this.NavigationServiceEx_OnNavigated;
             this.HamburgerMenuControl.Content = this.navigationServiceEx.Frame;
 
@@ -38,6 +37,7 @@ namespace SFACGPC.UI {
                 this.navigationServiceEx.Navigate(menuItem.NavigationDestination);
             }
         }
+
         private void NavigationServiceEx_OnNavigated(object sender, NavigationEventArgs e) {
             // select the menu item
             this.HamburgerMenuControl.SelectedItem = this.HamburgerMenuControl

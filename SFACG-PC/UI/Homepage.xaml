@@ -106,11 +106,11 @@
                             Orientation="Vertical">
                             <Button
                                 Height="30"
-                                Click="Favorites_Click"
+                                Click="Info_Click"
                                 Style="{StaticResource MaterialDesignFlatButton}">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Margin="5,1,5,0" Kind="Favorite" />
-                                    <TextBlock Margin="5,0,5,0" Text="{DynamicResource i18n.Favorites}" />
+                                    <materialDesign:PackIcon Margin="5,1,5,0" Kind="InfoCircleOutline" />
+                                    <TextBlock Margin="5,0,5,0" Text="{DynamicResource i18n.MoreInfo}" />
                                 </StackPanel>
                             </Button>
                             <Button

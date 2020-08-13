@@ -25,4 +25,17 @@
     <sys:String x:Key="i18n.Dialoguenovel" xml:space="preserve">对话小说</sys:String>
     <sys:String x:Key="i18n.Favorites" xml:space="preserve">收藏</sys:String>
     <sys:String x:Key="i18n.BeginRead" xml:space="preserve">阅读</sys:String>
+    <sys:String x:Key="i18n.Chatcount" xml:space="preserve">字数</sys:String>
+    <sys:String x:Key="i18n.Author" xml:space="preserve">作者</sys:String>
+    <sys:String x:Key="i18n.Good" xml:space="preserve">点赞</sys:String>
+    <sys:String x:Key="i18n.HotCount" xml:space="preserve">人气</sys:String>
+    <sys:String x:Key="i18n.BookDir" xml:space="preserve">目录</sys:String>
+    <sys:String x:Key="i18n.MoreInfo" xml:space="preserve">详细</sys:String>
+    <sys:String x:Key="i18n.Comment" xml:space="preserve">评论</sys:String>
+    <sys:String x:Key="i18n.Reward" xml:space="preserve">打赏</sys:String>
+    <sys:String x:Key="i18n.NeedVIP" xml:space="preserve">需要VIP</sys:String>
+    <sys:String x:Key="i18n.Tags" xml:space="preserve">标签</sys:String>
+    <sys:String x:Key="i18n.Intro" xml:space="preserve">简介</sys:String>
+    <sys:String x:Key="i18n.LatestTime" xml:space="preserve">最后更新时间</sys:String>
+    <sys:String x:Key="i18n.Type" xml:space="preserve">类型</sys:String>
 </ResourceDictionary>

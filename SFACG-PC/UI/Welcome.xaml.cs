@@ -22,7 +22,7 @@ namespace SFACGPC.UI {
             InitializeComponent();
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(timer1_Tick);
             timer.Start();
         }
