@@ -23,5 +23,6 @@
     <sys:String x:Key="i18n.Lightnovel" xml:space="preserve">轻小说</sys:String>
     <sys:String x:Key="i18n.Comics" xml:space="preserve">漫画</sys:String>
     <sys:String x:Key="i18n.Dialoguenovel" xml:space="preserve">对话小说</sys:String>
-
+    <sys:String x:Key="i18n.Favorites" xml:space="preserve">收藏</sys:String>
+    <sys:String x:Key="i18n.BeginRead" xml:space="preserve">阅读</sys:String>
 </ResourceDictionary>

@@ -5,87 +5,211 @@
     xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:SFACGPC.UI"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:SFACGPC.Data.ViewModel"
     Title="Homepage"
+    Width="Auto"
     d:DesignHeight="580"
-    d:DesignWidth="870"
+    d:DesignWidth="800"
     Background="{DynamicResource MaterialDesignPaper}"
     mc:Ignorable="d">
 
     <Page.Resources>
         <DataTemplate x:Key="HotPushDataTemplate" DataType="{x:Type viewModels:HotPushItem}">
-            <StackPanel Orientation="Horizontal">
-                <Border CornerRadius="15,15,15,15">
-                    <Image
-                        Width="110"
-                        Height="200"
-                        Source="{Binding Path=CoverUrl}" />
-                </Border>
-                <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Title}" />
-                <TextBlock Foreground="{DynamicResource MaterialDesignBody}" Text="{Binding Path=Tags}" />
-            </StackPanel>
+            <materialDesign:Card
+                Width="Auto"
+                Margin="10"
+                materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Border>
+                            <Image
+                                Width="128"
+                                Height="160"
+                                Source="{Binding Path=CoverUrl}" />
+                        </Border>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock
+                                Padding="15,15,0,0"
+                                FontFamily="Microsoft YaHei UI"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource MaterialDesignBody}"
+                                Text="{Binding Path=Title}"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Padding="15,5,0,0"
+                                FontFamily="Microsoft YaHei UI"
+                                FontSize="14"
+                                Foreground="#FF7F7F7F"
+                                Text="{Binding Path=AuthorName}"
+                                TextWrapping="Wrap" />
+                            <ItemsControl
+                                Margin="15,5,15,0"
+                                VerticalAlignment="Bottom"
+                                ItemsSource="{Binding Tags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type viewModels:tag}">
+                                        <Border
+                                            Margin="0,0,8,0"
+                                            Padding="8,2,8,2"
+                                            Background="#03A9F4"
+                                            CornerRadius="5">
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="White"
+                                                Text="{Binding Path=tagName}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <StackPanel Margin="15,5,15,0" Orientation="Horizontal">
+                                <Border
+                                    Margin="0,0,8,0"
+                                    Padding="8,2,8,2"
+                                    Background="#FF5722"
+                                    CornerRadius="5"
+                                    IsEnabled="{Binding IsSign}">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Text="签约" />
+                                </Border>
+                                <Border
+                                    Margin="0,0,8,0"
+                                    Padding="8,2,8,2"
+                                    Background="#4CAF50"
+                                    CornerRadius="5"
+                                    IsEnabled="{Binding IsSerialize}">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Text="连载" />
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Grid.Column="1">
+                        <StackPanel
+                            Margin="15,15,15,15"
+                            VerticalAlignment="Bottom"
+                            Orientation="Vertical">
+                            <Button
+                                Height="30"
+                                Click="Favorites_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Margin="5,1,5,0" Kind="Favorite" />
+                                    <TextBlock Margin="5,0,5,0" Text="{DynamicResource i18n.Favorites}" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Height="30"
+                                Click="BeginRead_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Margin="5,1,5,0" Kind="ChromeReaderMode" />
+                                    <TextBlock Margin="5,0,5,0" Text="{DynamicResource i18n.BeginRead}" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
         </DataTemplate>
+
         <DataTemplate x:Key="SpecialPushDataTemplate" DataType="{x:Type viewModels:SpecialPushItem}">
             <Grid>
                 <Image Source="{Binding Path=ImgUrl}" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
-    <Grid Margin="32,32,32,32">
+    <Grid Margin="32,0,32,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="48" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Controls:FlipView
-                x:Name="SpecialPushViewer"
-                Margin="0,0,5,0"
-                IsBannerEnabled="False"
-                ItemTemplate="{StaticResource SpecialPushDataTemplate}"
-                ItemsSource="{Binding SpecialPushItems}">
-                <Controls:FlipView.DataContext>
-                    <viewModels:SpecialPushViewModel />
-                </Controls:FlipView.DataContext>
-            </Controls:FlipView>
-        </Grid>
+        <StackPanel
+            Grid.Row="0"
+            Height="48"
+            Orientation="Horizontal">
+            <RadioButton
+                x:Name="LightnovelPage"
+                Margin="4"
+                Click="LightnovelPage_Checked"
+                Content="{DynamicResource i18n.Lightnovel}"
+                Foreground="{DynamicResource MaterialDesignBody}"
+                IsChecked="True"
+                Style="{StaticResource MaterialDesignTabRadioButton}" />
+            <RadioButton
+                x:Name="ComicsPage"
+                Margin="4"
+                Click="ComicsPage_Checked"
+                Content="{DynamicResource i18n.Comics}"
+                Foreground="{DynamicResource MaterialDesignBody}"
+                IsChecked="False"
+                Style="{StaticResource MaterialDesignTabRadioButton}" />
+            <RadioButton
+                x:Name="ChatNovelPage"
+                Margin="4"
+                Click="ChatNovelPage_Checked"
+                Content="{DynamicResource i18n.Dialoguenovel}"
+                Foreground="{DynamicResource MaterialDesignBody}"
+                IsChecked="False"
+                Style="{StaticResource MaterialDesignTabRadioButton}" />
+        </StackPanel>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="48" />
+                <RowDefinition Height="0.6*" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <StackPanel
-                Grid.Row="0"
-                Margin="4"
-                Orientation="Horizontal">
-                <RadioButton
-                    Margin="4"
-                    Content="{DynamicResource i18n.Lightnovel}"
-                    Foreground="{DynamicResource MaterialDesignBody}"
-                    IsChecked="True"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-                <RadioButton
-                    Margin="4"
-                    Content="{DynamicResource i18n.Comics}"
-                    Foreground="{DynamicResource MaterialDesignBody}"
-                    IsChecked="False"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-                <RadioButton
-                    Margin="4"
-                    Content="{DynamicResource i18n.Dialoguenovel}"
-                    Foreground="{DynamicResource MaterialDesignBody}"
-                    IsChecked="False"
-                    Style="{StaticResource MaterialDesignTabRadioButton}" />
-            </StackPanel>
-            <ItemsControl
-                x:Name="HotPushViewer"
-                Grid.Row="1"
-                ItemTemplate="{StaticResource HotPushDataTemplate}"
-                ItemsSource="{Binding HotPushItems}">
-                <ItemsControl.DataContext>
-                    <viewModels:HotPushViewModel />
-                </ItemsControl.DataContext>
-            </ItemsControl>
+            <Grid Grid.Row="0">
+                <Controls:FlipView
+                    x:Name="SpecialPushViewer"
+                    Margin="0,0,5,0"
+                    IsBannerEnabled="False"
+                    ItemTemplate="{StaticResource SpecialPushDataTemplate}"
+                    ItemsSource="{Binding SpecialPushItems}">
+                    <Controls:FlipView.DataContext>
+                        <viewModels:SpecialPushViewModel />
+                    </Controls:FlipView.DataContext>
+                </Controls:FlipView>
+            </Grid>
+            <Grid Grid.Row="1">
+                <ItemsControl
+                    x:Name="HotPushViewer"
+                    Grid.Row="1"
+                    ItemTemplate="{StaticResource HotPushDataTemplate}"
+                    ItemsSource="{Binding HotPushItems}">
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.DataContext>
+                        <viewModels:HotPushViewModel />
+                    </ItemsControl.DataContext>
+                </ItemsControl>
+
+            </Grid>
         </Grid>
+
     </Grid>
 </Page>

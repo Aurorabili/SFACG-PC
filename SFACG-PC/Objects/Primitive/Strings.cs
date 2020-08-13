@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using static SFACGPC.Data.Web.Response.PublicBookInfoRespone;
+using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Objects.Primitive {
     public static class Strings {

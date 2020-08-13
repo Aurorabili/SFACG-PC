@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SFACGPC.Data.ViewModel {
     [AddINotifyPropertyChangedInterface]
@@ -15,14 +16,24 @@ namespace SFACGPC.Data.ViewModel {
 
         public ObservableCollection<SpecialPushItem> SpecialPushItems => _specialpushitems;
 
-        private async void LoadView() {
-            this.SpecialPushItems.AddRange(await SFClient.Instance.GetSpecialPush());
+        public static async Task LoadData(string Mode) {
+            _specialpushitems.Clear();
+            List<SpecialPushItem> result = new List<SpecialPushItem>();
+            if (Mode == "Novel")
+                result = await SFClient.Instance.GetSpecialPush();
+            else if (Mode == "ChatNovel")
+                result = await SFClient.Instance.GetChatNovelSpecialPush();
+            else
+                result = await SFClient.Instance.GetComicsSpecialPush();
+            foreach (var item in result) {
+                if (item.ImgUrl != "")
+                    _specialpushitems.Add(item);
+            }
         }
         public SpecialPushViewModel() {
-            LoadView();
+            SpecialPushItems.Clear();
+            LoadData("Novel");
         }
-
-        
     }
 
     public class SpecialPushItem : FlipViewItem {

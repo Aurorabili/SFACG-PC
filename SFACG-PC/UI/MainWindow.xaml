@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:SFACGPC.Data.ViewModel"
     Title="SFACG - PC - 少女粉"
-    Width="800"
+    Width="719"
     Height="596"
     Background="{DynamicResource MaterialDesignPaper}"
     BorderThickness="0"

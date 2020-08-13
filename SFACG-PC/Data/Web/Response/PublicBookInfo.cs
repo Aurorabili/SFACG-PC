@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace SFACGPC.Data.Web.Response {
-    public class PublicBookInfoRespone {
+    public class PublicBookInfo {
         public class Status {
             public int httpCode { get; set; }
             public int errorCode { get; set; }
@@ -66,7 +66,7 @@ namespace SFACGPC.Data.Web.Response {
 
         public class Systag {
             public int sysTagId { get; set; }
-            public string tagName { get; set; }
+            public string tagName { get; set; }            
         }
 
     }
