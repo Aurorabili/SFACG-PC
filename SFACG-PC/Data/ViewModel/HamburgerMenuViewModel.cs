@@ -34,12 +34,6 @@ namespace SFACGPC.Data.ViewModel {
                 NavigationDestination = new Uri("UI/Bookshelf.xaml", UriKind.RelativeOrAbsolute)
             });
             this.Menu.Add(new HamburgerMenuPageItem() {
-                Icon = new PackIcon() { Kind = PackIconKind.BookOpenPageVariant },
-                Label = (string)Application.Current.FindResource("i18n.Bookviewer"),
-                NavigationType = typeof(Bookviewer),
-                NavigationDestination = new Uri("UI/Bookviewer.xaml", UriKind.RelativeOrAbsolute)
-            });
-            this.Menu.Add(new HamburgerMenuPageItem() {
                 Icon = new PackIcon() { Kind = PackIconKind.UserCircle },
                 Label = (string)Application.Current.FindResource("i18n.Usercenter"),
                 NavigationType = typeof(Usercenter),

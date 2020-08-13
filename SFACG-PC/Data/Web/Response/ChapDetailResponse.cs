@@ -24,7 +24,6 @@ namespace SFACGPC.Data.Web.Response {
             public int chapOrder { get; set; }
             public string title { get; set; }
             public DateTime addTime { get; set; }
-            public DateTime updateTime { get; set; }
             public int sno { get; set; }
             public bool isVip { get; set; }
             public Expand expand { get; set; }

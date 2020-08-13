@@ -51,7 +51,7 @@ namespace SFACGPC.UI {
 
         }
         private void BeginRead_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID.ToString());
+            NavigationService.Navigate(new Bookviewer(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID));
         }
     }
 }

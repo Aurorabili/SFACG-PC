@@ -12,6 +12,25 @@ using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Core {
     public static class SFClientExtension {
+        public static async Task<string> GetChapContent(this SFClient _, int ChapID) {
+            var result = await HttpClientFactory.AppApiService().GetChapDetailResponse(ChapID.ToString());
+            return result.data.expand.content;
+        }
+
+        public static async Task<List<Volumelist>> GetBookDir(this SFClient _, int NovelID) {
+            var result = await HttpClientFactory.AppApiService().GetNovelDirResponse(NovelID.ToString());
+            var list = new List<Volumelist>();
+
+            if (result is { } res) {
+                list.AddRange(res.data.volumeList.Select(p => new Volumelist {
+                    Chapterlist = p.chapterList.ToChapterItem(),
+                    Sno = p.sno,
+                    Title = p.title,
+                    VolumeId = p.volumeId
+                }));
+            }
+            return list;
+        }
 
         public static async Task<BookInfo> GetBookInfo(this SFClient _, string NovelID) {
             var result = await HttpClientFactory.AppApiService().GetNovelInfoResponse(NovelID);
@@ -79,7 +98,7 @@ namespace SFACGPC.Core {
                 list.AddRange(res.data.Select(book => new HotPushItem() {
                     CoverUrl = book.novelCover,
                     Title = book.novelName,
-                    Tags = Systag2tags(book.expand.sysTags),
+                    Tags = book.expand.sysTags.ToTags(),
                     NovelID = book.novelId,
                     AuthorName = book.authorName,
                     charCount = book.charCount.ToString(),
@@ -111,7 +130,7 @@ namespace SFACGPC.Core {
                 list.AddRange(res.data.Select(book => new HotPushItem() {
                     CoverUrl = book.novelCover,
                     Title = book.novelName,
-                    Tags = Systag2tags(book.expand.sysTags),
+                    Tags = book.expand.sysTags.ToTags(),
                     NovelID = book.novelId,
                     AuthorName = book.authorName,
                     charCount = book.charCount.ToString(),
@@ -122,7 +141,7 @@ namespace SFACGPC.Core {
             return list;
         }
 
-        public static List<tag> Systag2tags(Systag[] systags) {
+        public static List<tag> ToTags<T>(this T[] systags) where T : Systag{
             var tags = new List<tag>();
             if (systags.IsNullOrEmpty()) return tags;
             tags.AddRange(systags.Select(tagitem => new tag() {
@@ -130,6 +149,21 @@ namespace SFACGPC.Core {
                 sysTagId = tagitem.sysTagId
             }));
             return tags;
+        }
+
+        public static List<ChapterItem> ToChapterItem<T>(this T[] chapterlist) where T : NovelDirResponse.Chapterlist {
+            var result = new List<ChapterItem>();
+            result.AddRange(chapterlist.Select(p => new ChapterItem() {
+                ChapId = p.chapId,
+                CharCount = p.charCount,
+                IsVip = p.isVip,
+                NeedFireMoney = p.needFireMoney,
+                NovelId = p.novelId,
+                Title = p.title,
+                UpdateTime = p.updateTime,
+                VolumeId = p.volumeId
+            }));
+            return result;
         }
     }
 }
