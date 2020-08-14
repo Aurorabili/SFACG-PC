@@ -1,0 +1,46 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+    <sys:String x:Key="i18n.welcomeinfo" xml:space="preserve">
+        This project is an unofficial PC implementation
+        of Pineapple Bun Light Novel
+
+        You should read SFACG's official user agreement 
+        before using
+    </sys:String>
+
+    <sys:String x:Key="i18n.LoginDialogTitle" xml:space="preserve">Login</sys:String>
+    <sys:String x:Key="i18n.LoginDialogUsername" xml:space="preserve">Username</sys:String>
+    <sys:String x:Key="i18n.LoginDialogPassword" xml:space="preserve">Password</sys:String>
+    <sys:String x:Key="i18n.LoginDialogLogin" xml:space="preserve">Login</sys:String>
+    <sys:String x:Key="i18n.LoginDialogCancel" xml:space="preserve">Cancel</sys:String>
+    <sys:String x:Key="i18n.MainTitle" xml:space="preserve">SFACG</sys:String>
+    <sys:String x:Key="i18n.Homepage" xml:space="preserve">HomePage</sys:String>
+    <sys:String x:Key="i18n.Bookshelf" xml:space="preserve">BookShelf</sys:String>
+    <sys:String x:Key="i18n.Bookviewer" xml:space="preserve">Reader</sys:String>
+    <sys:String x:Key="i18n.Usercenter" xml:space="preserve">User</sys:String>
+    <sys:String x:Key="i18n.Setting" xml:space="preserve">Setting</sys:String>
+    <sys:String x:Key="i18n.Lightnovel" xml:space="preserve">Light Novel</sys:String>
+    <sys:String x:Key="i18n.Comics" xml:space="preserve">Comics</sys:String>
+    <sys:String x:Key="i18n.Dialoguenovel" xml:space="preserve">Chat Novel</sys:String>
+    <sys:String x:Key="i18n.Favorites" xml:space="preserve">Favorite</sys:String>
+    <sys:String x:Key="i18n.BeginRead" xml:space="preserve">Reading</sys:String>
+    <sys:String x:Key="i18n.Chatcount" xml:space="preserve">Total Words</sys:String>
+    <sys:String x:Key="i18n.Author" xml:space="preserve">Writer</sys:String>
+    <sys:String x:Key="i18n.Good" xml:space="preserve">Like</sys:String>
+    <sys:String x:Key="i18n.HotCount" xml:space="preserve">Hot</sys:String>
+    <sys:String x:Key="i18n.BookDir" xml:space="preserve">Contents</sys:String>
+    <sys:String x:Key="i18n.MoreInfo" xml:space="preserve">More</sys:String>
+    <sys:String x:Key="i18n.Comment" xml:space="preserve">Comment</sys:String>
+    <sys:String x:Key="i18n.Reward" xml:space="preserve">Reward</sys:String>
+    <sys:String x:Key="i18n.NeedVIP" xml:space="preserve">Need VIP</sys:String>
+    <sys:String x:Key="i18n.Tags" xml:space="preserve">Tags</sys:String>
+    <sys:String x:Key="i18n.Intro" xml:space="preserve">Introductiom</sys:String>
+    <sys:String x:Key="i18n.LatestTime" xml:space="preserve">Latest</sys:String>
+    <sys:String x:Key="i18n.Type" xml:space="preserve">Type</sys:String>
+    <sys:String x:Key="i18n.Nextvolume" xml:space="preserve">Next Volume</sys:String>
+    <sys:String x:Key="i18n.Previousvolume" xml:space="preserve">Previous Volume</sys:String>
+    <sys:String x:Key="i18n.NextPage" xml:space="preserve">Page Down</sys:String>
+    <sys:String x:Key="i18n.PreviousPage" xml:space="preserve">Page Up</sys:String>
+</ResourceDictionary>
