@@ -1,9 +1,4 @@
-﻿using SFACGPC.Objects;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SFACGPC.Data.Web {
+﻿namespace SFACGPC.Data.Web {
     public static class ProtocolBase {
         public static readonly string AppAPIBaseUrl = "https://api.sfacg.com/";
 

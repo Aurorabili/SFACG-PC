@@ -117,7 +117,7 @@
                                                 Kind="Heart" />
                                         </ToggleButton>
                                     </materialDesign:Badged>
-                                    <materialDesign:Badged Margin="5,0,5,0" Badge="{Binding MarkCount}">
+                                    <materialDesign:Badged Margin="5,0,5,0" Badge="{Binding Like}">
                                         <Button
                                             Width="40"
                                             Height="40"

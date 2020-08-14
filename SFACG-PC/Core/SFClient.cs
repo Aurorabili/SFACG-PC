@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SFACGPC.Core {
+﻿namespace SFACGPC.Core {
     public sealed class SFClient {
         private static volatile SFClient _instance;
 

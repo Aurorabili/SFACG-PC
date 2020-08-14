@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SFACGPC.Data.Web {
     public class HttpResponse<T> : Tuple<bool, T> {

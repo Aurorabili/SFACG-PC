@@ -3,9 +3,7 @@ using SFACGPC.Data.Web.Protocol;
 using SFACGPC.Objects.Generic;
 using SFACGPC.Persisting;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SFACGPC.Data.Web.Delegation {

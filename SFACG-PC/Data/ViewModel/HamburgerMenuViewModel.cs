@@ -1,12 +1,9 @@
 ﻿using MahApps.Metro.Controls;
 using MaterialDesignThemes.Wpf;
 using PropertyChanged;
-using SFACGPC.Objects.Primitive;
 using SFACGPC.UI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows;
 
 namespace SFACGPC.Data.ViewModel {

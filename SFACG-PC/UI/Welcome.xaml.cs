@@ -1,14 +1,7 @@
-﻿using MaterialDesignThemes.Wpf;
-using SFACGPC.Data.ViewModel;
-using SFACGPC.Persisting;
+﻿using SFACGPC.Persisting;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace SFACGPC.UI {

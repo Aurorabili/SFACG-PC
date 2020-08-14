@@ -1,8 +1,5 @@
 ﻿using PropertyChanged;
 using SFACGPC.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SFACGPC.Data.ViewModel {
@@ -33,5 +30,6 @@ namespace SFACGPC.Data.ViewModel {
         public int Point { get; set; }
         public string MarkCount { get; set; }
         public string TicketCount { get; set; }
+        public int Like { get; set; }
     }
 }

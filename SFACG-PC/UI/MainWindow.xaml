@@ -39,7 +39,6 @@
     </Controls:MetroWindow.LeftWindowCommands>
 
     <Controls:MetroWindow.Resources>
-
         <DataTemplate x:Key="MenuItemTemplate" DataType="{x:Type viewModels:HamburgerMenuPageItem}">
             <Grid Height="48">
                 <Grid.ColumnDefinitions>

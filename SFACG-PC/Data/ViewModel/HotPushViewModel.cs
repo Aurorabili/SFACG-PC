@@ -1,12 +1,10 @@
 ﻿using PropertyChanged;
-using System.Collections.ObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using SFACGPC.Objects.Generic;
 using SFACGPC.Core;
-using static SFACGPC.Data.Web.Response.PublicBookInfo;
+using SFACGPC.Objects.Generic;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Data.ViewModel {
     [AddINotifyPropertyChangedInterface]
@@ -24,7 +22,7 @@ namespace SFACGPC.Data.ViewModel {
                 result = await SFClient.Instance.GetChatNovelHotPush();
             else
                 result = await SFClient.Instance.GetComicsHotPush();
-            
+
             _hotPushItems.AddRange(result);
         }
         public HotPushViewModel() {
@@ -33,11 +31,11 @@ namespace SFACGPC.Data.ViewModel {
         }
 
     }
-    
+
     public class tag : Systag {
 
     }
-    
+
     public class HotPushItem {
         public string CoverUrl { get; set; }
         public string AuthorName { get; set; }

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SFACGPC.Data.Web.Response {
     public class NovelInfoResponse {
 
-            public Status status { get; set; }
-            public Data data { get; set; }
+        public Status status { get; set; }
+        public Data data { get; set; }
 
         public class Status {
             public int httpCode { get; set; }

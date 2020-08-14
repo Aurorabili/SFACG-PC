@@ -1,6 +1,5 @@
 ﻿namespace SFACGPC.Data.Web.Response {
-    public class ComicsSpecialPushResponse {
-
+    public class SearchResponse {
         public Status status { get; set; }
         public Data data { get; set; }
 
@@ -12,15 +11,9 @@
         }
 
         public class Data {
-            public Comicpush[] comicPush { get; set; }
+            public PublicBookInfo.Data[] novels { get; set; }
+            public object[] comics { get; set; }
+            public object[] albums { get; set; }
         }
-
-        public class Comicpush {
-            public string imgUrl { get; set; }
-            public string link { get; set; }
-            public string type { get; set; }
-            public string desc { get; set; }
-        }
-
     }
 }

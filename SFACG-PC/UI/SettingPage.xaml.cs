@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using SFACGPC.Data.ViewModel;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SFACGPC.UI {
     /// <summary>
@@ -18,6 +11,25 @@ namespace SFACGPC.UI {
     public partial class SettingPage : Page {
         public SettingPage() {
             InitializeComponent();
+        }
+
+        private async void TextBox_KeyDown(object sender, KeyEventArgs e) {
+            if (e.Key == Key.Enter) {
+                if (Regex.IsMatch(CommandBox.Text, @"(?<=GOTO )\S*", RegexOptions.IgnoreCase)) {
+                    BookInfoViewModel bookinfo = new BookInfoViewModel();
+                    await bookinfo.LoadData(Regex.Match(CommandBox.Text, @"(?<=GOTO )\S*", RegexOptions.IgnoreCase).Value);
+                    BookInfoPage page = new BookInfoPage(bookinfo.BookInfo);
+                    NavigationService.Navigate(page);
+                }
+                if (Regex.IsMatch(CommandBox.Text, @"(?<=SearchNovel )\S*", RegexOptions.IgnoreCase)) {
+                    BookListPage page = new BookListPage("Novel", Regex.Match(CommandBox.Text, @"(?<=SearchNovel )\S*", RegexOptions.IgnoreCase).Value);
+                    NavigationService.Navigate(page);
+                }
+                if (Regex.IsMatch(CommandBox.Text, @"(?<=SearchChatNovel )\S*", RegexOptions.IgnoreCase)) {
+                    BookListPage page = new BookListPage("ChatNovel", Regex.Match(CommandBox.Text, @"(?<=SearchChatNovel )\S*", RegexOptions.IgnoreCase).Value);
+                    NavigationService.Navigate(page);
+                }
+            }
         }
     }
 }

@@ -1,0 +1,161 @@
+﻿<Page
+    x:Class="SFACGPC.UI.BookListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SFACGPC.UI"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:SFACGPC.Data.ViewModel"
+    Title="Homepage"
+    Width="Auto"
+    d:DesignHeight="580"
+    d:DesignWidth="800"
+    Background="{DynamicResource MaterialDesignPaper}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="BookListDataTemplate" DataType="{x:Type viewModels:BookItem}">
+            <materialDesign:Card
+                Width="Auto"
+                Margin="10"
+                materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <Border>
+                            <Image
+                                Width="128"
+                                Height="160"
+                                Source="{Binding Path=CoverUrl}" />
+                        </Border>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock
+                                Padding="15,15,0,0"
+                                FontFamily="Microsoft YaHei UI"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource MaterialDesignBody}"
+                                Text="{Binding Path=Title}"
+                                TextWrapping="Wrap" />
+                            <TextBlock
+                                Padding="15,5,0,0"
+                                FontFamily="Microsoft YaHei UI"
+                                FontSize="14"
+                                Foreground="#FF7F7F7F"
+                                Text="{Binding Path=AuthorName}"
+                                TextWrapping="Wrap" />
+                            <ItemsControl
+                                Margin="15,5,15,0"
+                                VerticalAlignment="Bottom"
+                                ItemsSource="{Binding Tags}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel IsItemsHost="True" Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type viewModels:tag}">
+                                        <Border
+                                            Margin="0,0,8,0"
+                                            Padding="8,2,8,2"
+                                            Background="#03A9F4"
+                                            CornerRadius="5">
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="White"
+                                                Text="{Binding Path=tagName}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <StackPanel Margin="15,5,15,0" Orientation="Horizontal">
+                                <Border
+                                    Margin="0,0,8,0"
+                                    Padding="8,2,8,2"
+                                    Background="#FF5722"
+                                    CornerRadius="5"
+                                    IsEnabled="{Binding IsSign}">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Text="签约" />
+                                </Border>
+                                <Border
+                                    Margin="0,0,8,0"
+                                    Padding="8,2,8,2"
+                                    Background="#4CAF50"
+                                    CornerRadius="5"
+                                    IsEnabled="{Binding IsSerialize}">
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="White"
+                                        Text="连载" />
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <Grid Grid.Column="1">
+                        <StackPanel
+                            Margin="15,15,15,15"
+                            VerticalAlignment="Bottom"
+                            Orientation="Vertical">
+                            <Button
+                                Height="30"
+                                Click="Info_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Margin="5,1,5,0" Kind="InfoCircleOutline" />
+                                    <TextBlock Margin="5,0,5,0" Text="{DynamicResource i18n.MoreInfo}" />
+                                </StackPanel>
+                            </Button>
+                            <Button
+                                Height="30"
+                                Click="BeginRead_Click"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Margin="5,1,5,0" Kind="ChromeReaderMode" />
+                                    <TextBlock Margin="5,0,5,0" Text="{DynamicResource i18n.BeginRead}" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid Margin="32,0,32,0">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.6*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <ItemsControl
+                    x:Name="BookListViewer"
+                    Grid.Row="1"
+                    ItemTemplate="{StaticResource BookListDataTemplate}"
+                    ItemsSource="{Binding BookItems}">
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <ScrollViewer x:Name="ScrollViewer" Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Page>

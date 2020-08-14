@@ -1,9 +1,6 @@
 ﻿using PropertyChanged;
 using SFACGPC.Core;
 using System;
-using System.Collections.Generic;
-using System.Security.Policy;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,7 +17,8 @@ namespace SFACGPC.Data.ViewModel {
         public Paragraph Para => _para;
         public string Title => _title;
 
-        public async Task LoadData(int ChapID) {
+        public async Task LoadData(int NovelID, int ChapID) {
+            await SFClient.Instance.PutUserView(NovelID, ChapID);
             var chapItem = await SFClient.Instance.GetChapContent(ChapID);
             string src = chapItem.Content;
             _title = chapItem.Title;

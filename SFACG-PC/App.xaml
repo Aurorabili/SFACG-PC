@@ -13,7 +13,7 @@
 
                 <!--  Material Design  -->
                 <materialDesign:BundledTheme
-                    BaseTheme="Dark"
+                    BaseTheme="Light"
                     PrimaryColor="Pink"
                     SecondaryColor="DeepOrange" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
@@ -24,7 +24,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Pink.xaml" />
 
                 <!--  I18N  -->
-                <ResourceDictionary Source="pack://application:,,,/SFACGPC;component/Resources/Language/zh_cn.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/SFACGPC;component/Resources/Language/en_us.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -1,20 +1,11 @@
 ﻿using MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Navigation;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using System.Collections.ObjectModel;
-using SFACGPC.Objects.Primitive;
-using System.Linq;
 using SFACGPC.Data.ViewModel;
+using SFACGPC.Objects.Primitive;
+using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace SFACGPC.UI {
     /// <summary>
@@ -52,6 +43,10 @@ namespace SFACGPC.UI {
         }
         private void GoBack_OnClick(object sender, RoutedEventArgs e) {
             this.navigationServiceEx.GoBack();
+        }
+
+        private void CommandBinding_OpenDirDialog_CanExecute(object sender, CanExecuteRoutedEventArgs e) {
+            e.CanExecute = true;
         }
     }
 }

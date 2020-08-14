@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SFACGPC.Data.Web.Response {
     public class PublicBookInfo {
@@ -28,6 +26,7 @@ namespace SFACGPC.Data.Web.Response {
             public bool allowDown { get; set; }
             public string signStatus { get; set; }
             public int categoryId { get; set; }
+            public int weight { get; set; }
             public Expand expand { get; set; }
         }
 
@@ -66,7 +65,7 @@ namespace SFACGPC.Data.Web.Response {
 
         public class Systag {
             public int sysTagId { get; set; }
-            public string tagName { get; set; }            
+            public string tagName { get; set; }
         }
 
     }

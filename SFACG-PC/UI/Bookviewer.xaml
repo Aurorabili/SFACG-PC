@@ -16,19 +16,33 @@
 
     <Page.Resources>
         <RoutedUICommand x:Key="OpenDirDialog" />
-
+        <RoutedUICommand x:Key="PageDown" />
+        <RoutedUICommand x:Key="PageUp" />
     </Page.Resources>
     <Page.InputBindings>
-        <KeyBinding Command="{StaticResource OpenDirDialog}" Gesture="Ctrl+D" />
+        <KeyBinding
+            Key="D"
+            Command="{StaticResource OpenDirDialog}"
+            Modifiers="Ctrl" />
+        <KeyBinding Key="X" Command="{StaticResource PageDown}" />
+        <KeyBinding Key="Z" Command="{StaticResource PageUp}" />
     </Page.InputBindings>
     <Page.CommandBindings>
         <CommandBinding
             CanExecute="CommandBinding_OpenDirDialog_CanExecute"
             Command="{StaticResource OpenDirDialog}"
             Executed="CommandBinding_OpenDirDialog_Executed" />
+        <CommandBinding
+            CanExecute="CommandBinding_PageDown_CanExecute"
+            Command="{StaticResource PageDown}"
+            Executed="CommandBinding_PageDown_Executed" />
+        <CommandBinding
+            CanExecute="CommandBinding_PageUp_CanExecute"
+            Command="{StaticResource PageUp}"
+            Executed="CommandBinding_PageUp_Executed" />
     </Page.CommandBindings>
     <materialDesign:DialogHost Identifier="RootDialog">
-        <Grid Margin="20">
+        <Grid Margin="20" FocusManager.FocusedElement="{Binding ElementName=Reader}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition />

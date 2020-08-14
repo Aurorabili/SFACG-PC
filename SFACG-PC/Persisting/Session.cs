@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
-using SFACGPC.Data.Web;
-using SFACGPC.Data.Web.Delegation;
-using SFACGPC.Data.Web.Response;
 using SFACGPC.Objects.Primitive;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +19,7 @@ namespace SFACGPC.Persisting {
 
         public DateTime ExpireIn { set; get; }
 
-        public static Session Parse(string _sfcommunity,string _session_id) {
+        public static Session Parse(string _sfcommunity, string _session_id) {
             return new Session {
                 SFCommunity = _sfcommunity,
                 Session_ID = _session_id,

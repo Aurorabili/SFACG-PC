@@ -3,15 +3,54 @@ using SFACGPC.Data.Web.Delegation;
 using SFACGPC.Data.Web.Response;
 using SFACGPC.Objects.Generic;
 using SFACGPC.Objects.Primitive;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Core {
     public static class SFClientExtension {
+        public static async Task<List<BookItem>> SearchNovels(this SFClient _, string keyword) {
+            var result = await HttpClientFactory.AppApiService().SearchNovel(keyword);
+            var list = new List<BookItem>();
+            if (result is { } res) {
+                list.AddRange(res.data.novels.Select(book => new BookItem() {
+                    CoverUrl = book.novelCover,
+                    Title = book.novelName,
+                    Tags = book.expand.sysTags.ToTags(),
+                    NovelID = book.novelId,
+                    AuthorName = book.authorName,
+                    charCount = book.charCount.ToString(),
+                    IsSerialize = !book.isFinish,
+                    IsSign = (book.signStatus == "签约")
+                }));
+            }
+            return list;
+        }
+        public static async Task<List<BookItem>> SearchChatNovels(this SFClient _, string keyword) {
+            var result = await HttpClientFactory.AppApiService().SearchChatNovel(keyword);
+            var list = new List<BookItem>();
+            if (result is { } res) {
+                list.AddRange(res.data.novels.Select(book => new BookItem() {
+                    CoverUrl = book.novelCover,
+                    Title = book.novelName,
+                    Tags = book.expand.sysTags.ToTags(),
+                    NovelID = book.novelId,
+                    AuthorName = book.authorName,
+                    charCount = book.charCount.ToString(),
+                    IsSerialize = !book.isFinish,
+                    IsSign = (book.signStatus == "签约")
+                }));
+            }
+            return list;
+        }
+
+        public static async Task PutUserView(this SFClient _, int NovelID, int ChapID) {
+            await HttpClientFactory.AppApiService().PutUserNovelView(NovelID.ToString(), new Data.Web.Request.UserNovelViews() {
+                chapterId = ChapID,
+                triggerCardPieceDrop = true
+            });
+        }
         public static async Task<ChapItem> GetChapContent(this SFClient _, int ChapID) {
             var result = await HttpClientFactory.AppApiService().GetChapDetailResponse(ChapID.ToString());
             return new ChapItem() {
@@ -48,7 +87,8 @@ namespace SFACGPC.Core {
                 Point = (int)(result.data.point / 2),
                 TicketCount = result.data.expand.ticket.ToString(),
                 Title = result.data.novelName,
-                TypeString = result.data.expand.typeName + "/" + ((!result.data.isFinish) ? "连载中" : "已完结")
+                TypeString = result.data.expand.typeName + "/" + ((!result.data.isFinish) ? "连载中" : "已完结"),
+                Like = result.data.expand.fav
             };
         }
         public static async Task<string> GetAuthorAvatar(this SFClient _, int AuthorID) {
@@ -144,7 +184,7 @@ namespace SFACGPC.Core {
             return list;
         }
 
-        public static List<tag> ToTags<T>(this T[] systags) where T : Systag{
+        public static List<tag> ToTags<T>(this T[] systags) where T : Systag {
             var tags = new List<tag>();
             if (systags.IsNullOrEmpty()) return tags;
             tags.AddRange(systags.Select(tagitem => new tag() {
