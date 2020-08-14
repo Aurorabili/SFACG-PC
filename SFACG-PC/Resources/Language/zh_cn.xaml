@@ -14,7 +14,7 @@
     <sys:String x:Key="i18n.LoginDialogPassword" xml:space="preserve">密码</sys:String>
     <sys:String x:Key="i18n.LoginDialogLogin" xml:space="preserve">登录</sys:String>
     <sys:String x:Key="i18n.LoginDialogCancel" xml:space="preserve">取消</sys:String>
-    <sys:String x:Key="i18n.MainLeftDrawerTitle" xml:space="preserve">菠萝包轻小说</sys:String>
+    <sys:String x:Key="i18n.MainTitle" xml:space="preserve">菠萝包轻小说</sys:String>
     <sys:String x:Key="i18n.Homepage" xml:space="preserve">首页</sys:String>
     <sys:String x:Key="i18n.Bookshelf" xml:space="preserve">书架</sys:String>
     <sys:String x:Key="i18n.Bookviewer" xml:space="preserve">阅读</sys:String>
@@ -38,4 +38,8 @@
     <sys:String x:Key="i18n.Intro" xml:space="preserve">简介</sys:String>
     <sys:String x:Key="i18n.LatestTime" xml:space="preserve">最后更新时间</sys:String>
     <sys:String x:Key="i18n.Type" xml:space="preserve">类型</sys:String>
+    <sys:String x:Key="i18n.Nextvolume" xml:space="preserve">下一卷</sys:String>
+    <sys:String x:Key="i18n.Previousvolume" xml:space="preserve">上一卷</sys:String>
+    <sys:String x:Key="i18n.NextPage" xml:space="preserve">上一章</sys:String>
+    <sys:String x:Key="i18n.PreviousPage" xml:space="preserve">下一章</sys:String>
 </ResourceDictionary>

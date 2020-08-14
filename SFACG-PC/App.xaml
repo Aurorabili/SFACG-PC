@@ -7,6 +7,8 @@
     StartupUri="UI/Welcome.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <!--  Font Family  -->
+
             <ResourceDictionary.MergedDictionaries>
 
                 <!--  Material Design  -->
@@ -23,7 +25,10 @@
 
                 <!--  I18N  -->
                 <ResourceDictionary Source="pack://application:,,,/SFACGPC;component/Resources/Language/zh_cn.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
+
     </Application.Resources>
 </Application>

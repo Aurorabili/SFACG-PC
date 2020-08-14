@@ -12,9 +12,12 @@ using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Core {
     public static class SFClientExtension {
-        public static async Task<string> GetChapContent(this SFClient _, int ChapID) {
+        public static async Task<ChapItem> GetChapContent(this SFClient _, int ChapID) {
             var result = await HttpClientFactory.AppApiService().GetChapDetailResponse(ChapID.ToString());
-            return result.data.expand.content;
+            return new ChapItem() {
+                Content = result.data.expand.content,
+                Title = result.data.title
+            };
         }
 
         public static async Task<List<Volumelist>> GetBookDir(this SFClient _, int NovelID) {

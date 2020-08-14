@@ -10,7 +10,7 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:SFACGPC.Data.ViewModel"
-    Title="SFACG - PC - 少女粉"
+    Title="{DynamicResource i18n.MainTitle}"
     Width="719"
     Height="596"
     Background="{DynamicResource MaterialDesignPaper}"

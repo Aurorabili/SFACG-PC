@@ -15,9 +15,15 @@ using System.Windows.Media.Imaging;
 namespace SFACGPC.Data.ViewModel {
     [AddINotifyPropertyChangedInterface]
     public class BookContentViewModel {
+        private static Paragraph _para = new Paragraph();
+        private static string _title = null;
+        public Paragraph Para => _para;
+        public string Title => _title;
 
-        public static async Task<Paragraph> LoadData(int ChapID) {
-            string src = await SFClient.Instance.GetChapContent(ChapID);
+        public async Task LoadData(int ChapID) {
+            var chapItem = await SFClient.Instance.GetChapContent(ChapID);
+            string src = chapItem.Content;
+            _title = chapItem.Title;
             src = Regex.Replace("\r\n" + src, @"\r\n\s*", "\r\n    ");
             Paragraph paragraph = new Paragraph();
 
@@ -26,8 +32,8 @@ namespace SFACGPC.Data.ViewModel {
 
                 string imgurl = Regex.Match(match.Value, @"(?<=\[img=\S*\]).*?(?=\[\/img\])").Value;
                 src = src.Remove(match.Index, match.Value.Length);
-                string str = src.Substring(0, src.Length - match.Index);
-                src = src.Remove(0, src.Length - match.Index);
+                string str = src.Substring(0, match.Index);
+                src = src.Remove(0, match.Index);
                 Run r = new Run(str);
                 paragraph.Inlines.Add(r);
                 InlineUIContainer inlineUI = new InlineUIContainer(get_image(imgurl));
@@ -37,7 +43,7 @@ namespace SFACGPC.Data.ViewModel {
             Run rd = new Run(src);
             paragraph.Inlines.Add(rd);
             paragraph.LineHeight = 30;
-            return paragraph;
+            _para = paragraph;
         }
         public BookContentViewModel() {
         }
@@ -60,5 +66,9 @@ namespace SFACGPC.Data.ViewModel {
             }
             return image;
         }
+    }
+    public class ChapItem {
+        public string Title { get; set; }
+        public string Content { get; set; }
     }
 }

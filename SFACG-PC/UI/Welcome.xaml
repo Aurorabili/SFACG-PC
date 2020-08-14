@@ -24,11 +24,6 @@
                         <ColumnDefinition Width="319*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <ProgressBar
-                            Width="228"
-                            Margin="41,125,68,315"
-                            IsIndeterminate="True" 
-                            Style="{DynamicResource MaterialDesignLinearProgressBar}"/>
                         <Grid
                             Width="64"
                             Height="64"

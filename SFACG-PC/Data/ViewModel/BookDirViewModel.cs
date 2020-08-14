@@ -38,6 +38,7 @@ namespace SFACGPC.Data.ViewModel {
         public int VolumeId { get; set; }
         public string Title { get; set; }
         public float Sno { get; set; }
+        public bool IsExpand { get; set; } = false;
         public List<ChapterItem> Chapterlist { get; set; }
     }
 }
