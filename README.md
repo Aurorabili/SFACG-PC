@@ -1,3 +1,5 @@
+# 未完成
+
 # SFACG - PC
 
 ## 简介
@@ -6,7 +8,7 @@
 ## 从源构建
 ### 环境
 - Visual Studio 2019
-- Windows 10 (1089以上版本)
+- Windows 10
 - .Net Core 3.1
 ### 编译
 **第一步：** 克隆仓库：`git clone https://github.com/Aurorabili/SFACG-PC.git`
