@@ -1,5 +1,6 @@
 ﻿using PropertyChanged;
 using SFACGPC.Core;
+using SFACGPC.Objects.Primitive;
 using System;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace SFACGPC.Data.ViewModel {
                 src = src.Remove(0, match.Index);
                 Run r = new Run(str);
                 paragraph.Inlines.Add(r);
-                InlineUIContainer inlineUI = new InlineUIContainer(get_image(imgurl));
+                InlineUIContainer inlineUI = new InlineUIContainer(Strings.ToImage(imgurl));
                 paragraph.Inlines.Add(inlineUI);
                 match = Regex.Match(src, @"\[img=\S*\].*?\[\/img\]");
             }
@@ -46,26 +47,11 @@ namespace SFACGPC.Data.ViewModel {
         public BookContentViewModel() {
         }
 
-        public static Image get_image(string url) {
-            var image = new Image();
-            try {
-                System.Net.WebRequest webreq = System.Net.WebRequest.Create(url);
-                System.Net.WebResponse webres = webreq.GetResponse();
-                System.IO.Stream stream = webres.GetResponseStream();
-                System.Drawing.Image img1 = System.Drawing.Image.FromStream(stream);
-                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img1);
-                IntPtr hBitmap = bmp.GetHbitmap();
-                System.Windows.Media.ImageSource WpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                image.Source = WpfBitmap;
-                image.Stretch = Stretch.Uniform;
-                stream.Dispose();
-            } catch (Exception e) {
-                return null;
-            }
-            return image;
-        }
     }
     public class ChapItem {
+        public int ChapID { get; set; }
+        public int NovelID { get; set; }
+        public int VolumeID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
     }

@@ -31,6 +31,7 @@ namespace SFACGPC.UI {
 
         private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e) {
             Bookviewer._chapid = ((SFACGPC.Data.ViewModel.ChapterItem)((System.Windows.FrameworkElement)sender).DataContext).ChapId;
+            ChatNovelViewer._chapid = ((SFACGPC.Data.ViewModel.ChapterItem)((System.Windows.FrameworkElement)sender).DataContext).ChapId;
             NavigationService.GoBack();
         }
         private void CommandBinding_NextVolumeList_Executed(object sender, RoutedEventArgs e) {

@@ -5,10 +5,35 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Objects.Primitive {
     public static class Strings {
+
+        public static Image ToImage(this string url) {
+            var image = new Image();
+            try {
+                System.Net.WebRequest webreq = System.Net.WebRequest.Create(url);
+                System.Net.WebResponse webres = webreq.GetResponse();
+                System.IO.Stream stream = webres.GetResponseStream();
+                System.Drawing.Image img1 = System.Drawing.Image.FromStream(stream);
+                System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img1);
+                IntPtr hBitmap = bmp.GetHbitmap();
+                System.Windows.Media.ImageSource WpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                image.Source = WpfBitmap;
+                image.Stretch = Stretch.Uniform;
+                stream.Dispose();
+            } catch (Exception e) {
+                return null;
+            }
+            return image;
+        }
+
         public static string Tag2Str<T>(this T[] src) where T : Systag {
             string result = null;
             foreach (var item in src) {
@@ -75,6 +100,19 @@ namespace SFACGPC.Objects.Primitive {
             using var crypt = new T();
             var hashBytes = crypt.ComputeHash(str.GetBytes());
             return hashBytes.Select(b => b.ToString("x2")).Aggregate((s1, s2) => s1 + s2);
+        }
+
+        public static string ToUnicode(this string source) {
+            byte[] bytes = Encoding.Unicode.GetBytes(source);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i += 2) {
+                stringBuilder.AppendFormat("&#x{0}{1};", bytes[i + 1].ToString("x").PadLeft(2, '0'), bytes[i].ToString("x").PadLeft(2, '0'));
+            }
+            return stringBuilder.ToString();
+        }
+
+        public static string FormatUnalbeShowChar(this string src) {
+            return Regex.Replace(src, @"[\u0300-\u036F]", "");
         }
     }
 }

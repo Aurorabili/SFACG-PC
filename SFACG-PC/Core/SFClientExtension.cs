@@ -3,6 +3,7 @@ using SFACGPC.Data.Web.Delegation;
 using SFACGPC.Data.Web.Response;
 using SFACGPC.Objects.Generic;
 using SFACGPC.Objects.Primitive;
+using SFACGPC.Objects.Primitive;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,16 @@ using static SFACGPC.Data.Web.Response.PublicBookInfo;
 
 namespace SFACGPC.Core {
     public static class SFClientExtension {
+        public static async Task<int> NovelViewData(this SFClient _, int NovelID) {
+            var result = await HttpClientFactory.AppApiService().GetUserViewDataResponse();
+            foreach (var item in result.data) {
+                if (item.novelId == NovelID) {
+                    return item.chapterId;
+                }
+            }
+            return -1;
+        }
+
         public static async Task<List<BookItem>> SearchNovels(this SFClient _, string keyword) {
             var result = await HttpClientFactory.AppApiService().SearchNovel(keyword);
             var list = new List<BookItem>();
@@ -21,8 +32,9 @@ namespace SFACGPC.Core {
                     NovelID = book.novelId,
                     AuthorName = book.authorName,
                     charCount = book.charCount.ToString(),
-                    IsSerialize = !book.isFinish,
-                    IsSign = (book.signStatus == "签约")
+                    IsSerialize = (!book.isFinish) ? "Visiable" : "Collapsed",
+                    IsSign = (book.signStatus == "签约") ? "Visiable" : "Collapsed",
+                    IsChatNovel = false,
                 }));
             }
             return list;
@@ -38,8 +50,9 @@ namespace SFACGPC.Core {
                     NovelID = book.novelId,
                     AuthorName = book.authorName,
                     charCount = book.charCount.ToString(),
-                    IsSerialize = !book.isFinish,
-                    IsSign = (book.signStatus == "签约")
+                    IsSerialize = (!book.isFinish) ? "Visiable" : "Collapsed",
+                    IsSign = (book.signStatus == "签约") ? "Visiable" : "Collapsed",
+                    IsChatNovel = true
                 }));
             }
             return list;
@@ -54,9 +67,29 @@ namespace SFACGPC.Core {
         public static async Task<ChapItem> GetChapContent(this SFClient _, int ChapID) {
             var result = await HttpClientFactory.AppApiService().GetChapDetailResponse(ChapID.ToString());
             return new ChapItem() {
+                ChapID = result.data.chapId,
+                NovelID = result.data.novelId,
+                VolumeID = result.data.volumeId,
                 Content = result.data.expand.content,
                 Title = result.data.title
             };
+        }
+        public static async Task<List<ChatLineItem>> GetChapChatline(this SFClient _, int ChapID) {
+            var result = await HttpClientFactory.AppApiService().GetChapDetailResponse(ChapID.ToString());
+            var list = new List<ChatLineItem>();
+
+            if (result is { } res) {
+                list.AddRange(res.data.expand.chatLines.Select(p => new ChatLineItem() {
+                    Avatar = p.avatar,
+                    CharId = p.charId,
+                    CharName = p.charName,
+                    Content = p.content.FormatUnalbeShowChar(),
+                    Image = p.image,
+                    ChatType = (p.charType == 0&&!p.avatar.IsNullOrEmpty()) ? "Left" : (!p.avatar.IsNullOrEmpty() ? "Right" : "Center"),
+                    IsShowChip = (p.avatar.IsNullOrEmpty()) ? "Collapsed" : "Visiable"
+                }));
+            }
+            return list;
         }
 
         public static async Task<List<Volumelist>> GetBookDir(this SFClient _, int NovelID) {
@@ -145,8 +178,9 @@ namespace SFACGPC.Core {
                     NovelID = book.novelId,
                     AuthorName = book.authorName,
                     charCount = book.charCount.ToString(),
-                    IsSerialize = !book.isFinish,
-                    IsSign = (book.signStatus == "签约")
+                    IsSerialize = (!book.isFinish) ? "Visiable" : "Collapsed",
+                    IsSign = (book.signStatus == "签约") ? "Visiable" : "Collapsed",
+                    IsChatNovel = false
                 }));
             }
             return list;
@@ -160,8 +194,8 @@ namespace SFACGPC.Core {
                     Title = book.comicName,
                     NovelID = book.comicId,
                     AuthorName = book.comicName,
-                    IsSerialize = !book.isFinished,
-                    IsSign = false
+                    IsSerialize = (!book.isFinished)? "Visiable" : "Collapsed",
+                    IsSign = "Collapsed"
                 }));
             }
             return list;
@@ -177,8 +211,9 @@ namespace SFACGPC.Core {
                     NovelID = book.novelId,
                     AuthorName = book.authorName,
                     charCount = book.charCount.ToString(),
-                    IsSerialize = !book.isFinish,
-                    IsSign = (book.signStatus == "签约")
+                    IsSerialize = (!book.isFinish) ? "Visiable" : "Collapsed",
+                    IsSign = (book.signStatus == "签约") ? "Visiable" : "Collapsed",
+                    IsChatNovel = true,
                 }));
             }
             return list;

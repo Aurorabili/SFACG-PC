@@ -1,0 +1,100 @@
+﻿<Page
+    x:Class="SFACGPC.UI.ChatNovelViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SFACGPC.UI"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:SFACGPC.Data.ViewModel"
+    Title="ChatNovelViewer"
+    d:DesignHeight="591.739"
+    d:DesignWidth="719.156"
+    Background="{DynamicResource MaterialDesignPaper}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <ResourceDictionary>
+            <RoutedUICommand x:Key="OpenDirDialog" />
+            <RoutedUICommand x:Key="PageDown" />
+            <RoutedUICommand x:Key="PageUp" />
+            <DataTemplate x:Key="ChatBox" DataType="{x:Type viewModels:ChatLineItem}">
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <materialDesign:Chip
+                        HorizontalAlignment="{Binding ChatType}"
+                        Content="{Binding CharName}"
+                        FontSize="12"
+                        Foreground="{DynamicResource MaterialDesignBody}"
+                        Visibility="{Binding IsShowChip}">
+                        <materialDesign:Chip.Icon>
+                            <Image Source="{Binding Avatar}" />
+                        </materialDesign:Chip.Icon>
+                    </materialDesign:Chip>
+                    <materialDesign:Card
+                        MaxWidth="500"
+                        Margin="0,5,0,0"
+                        Padding="8"
+                        HorizontalAlignment="{Binding ChatType}"
+                        Background="{DynamicResource MaterialDesignPaper}"
+                        Foreground="{DynamicResource MaterialDesignBody}"
+                        UniformCornerRadius="6">
+                        <Grid>
+                            <TextBlock
+                                FontSize="15"
+                                Text="{Binding Content}"
+                                TextWrapping="Wrap" />
+                            <Image Source="{Binding Image}" />
+                        </Grid>
+                    </materialDesign:Card>
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Page.InputBindings>
+        <KeyBinding
+            Key="D"
+            Command="{StaticResource OpenDirDialog}"
+            Modifiers="Ctrl" />
+        <KeyBinding Key="X" Command="{StaticResource PageDown}" />
+        <KeyBinding Key="Z" Command="{StaticResource PageUp}" />
+    </Page.InputBindings>
+    <Page.CommandBindings>
+        <CommandBinding
+            CanExecute="CommandBinding_OpenDirDialog_CanExecute"
+            Command="{StaticResource OpenDirDialog}"
+            Executed="CommandBinding_OpenDirDialog_Executed" />
+        <CommandBinding
+            CanExecute="CommandBinding_PageDown_CanExecute"
+            Command="{StaticResource PageDown}"
+            Executed="CommandBinding_PageDown_Executed" />
+        <CommandBinding
+            CanExecute="CommandBinding_PageUp_CanExecute"
+            Command="{StaticResource PageUp}"
+            Executed="CommandBinding_PageUp_Executed" />
+    </Page.CommandBindings>
+    <materialDesign:DialogHost Identifier="RootDialog">
+        <Grid Margin="20" FocusManager.FocusedElement="{Binding ElementName=Reader}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.6*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+                <ScrollViewer x:Name="ChatUserControl" Grid.Column="1">
+                    <ItemsControl x:Name="ChatShower" ItemTemplate="{StaticResource ChatBox}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Vertical" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</Page>

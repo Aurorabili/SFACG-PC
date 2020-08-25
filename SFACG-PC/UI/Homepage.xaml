@@ -79,7 +79,7 @@
                                     Padding="8,2,8,2"
                                     Background="#FF5722"
                                     CornerRadius="5"
-                                    IsEnabled="{Binding IsSign}">
+                                    Visibility="{Binding IsSign}">
                                     <TextBlock
                                         FontSize="12"
                                         Foreground="White"
@@ -90,7 +90,7 @@
                                     Padding="8,2,8,2"
                                     Background="#4CAF50"
                                     CornerRadius="5"
-                                    IsEnabled="{Binding IsSerialize}">
+                                    Visibility="{Binding IsSerialize}">
                                     <TextBlock
                                         FontSize="12"
                                         Foreground="White"

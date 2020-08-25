@@ -55,5 +55,10 @@ namespace SFACGPC.Data.Web.Protocol {
         [Get("/search/chatnovels/result?q={query}&expand=novels%2Ccomics%2Calbums%2Cchatnovelstags%2CtypeName%2CauthorName%2Cintro%2Clatestchaptitle%2Clatestchapintro%2Ctags%2CsysTags&sort=hot&page=0&size=15")]
         Task<SearchResponse> SearchChatNovel([AliasAs("query")] string keyword);
 
+        [Get("/user/NovelViews")]
+        Task<UserViewDataResponse> GetUserViewDataResponse();
+
+        [Get("/user/Pockets?expand=novels%2Calbums%2Ccomics%2Cdiscount%2CdiscountExpireDate")]
+        Task<PocketsResponse> GetPocketsResponse();
     }
 }

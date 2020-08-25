@@ -13,7 +13,7 @@
 
                 <!--  Material Design  -->
                 <materialDesign:BundledTheme
-                    BaseTheme="Light"
+                    BaseTheme="Dark"
                     PrimaryColor="Pink"
                     SecondaryColor="DeepOrange" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

@@ -35,8 +35,9 @@ namespace SFACGPC.Data.ViewModel {
         public string Title { get; set; }
         public string charCount { get; set; }
         public List<tag> Tags { get; set; }
-        public bool IsSerialize { get; set; }
-        public bool IsSign { get; set; }
+        public string IsSerialize { get; set; }
+        public string IsSign { get; set; }
         public int NovelID { get; set; }
+        public bool IsChatNovel { get; set; }
     }
 }

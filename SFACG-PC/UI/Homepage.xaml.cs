@@ -1,4 +1,5 @@
-﻿using SFACGPC.Data.ViewModel;
+﻿using SFACGPC.Core;
+using SFACGPC.Data.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
@@ -38,8 +39,19 @@ namespace SFACGPC.UI {
             NavigationService.Navigate(page);
 
         }
-        private void BeginRead_Click(object sender, RoutedEventArgs e) {
-            NavigationService.Navigate(new Bookviewer(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID));
+        private async void BeginRead_Click(object sender, RoutedEventArgs e) {
+            int _novelid = ((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID;
+            int _chapid = await SFClient.Instance.NovelViewData(_novelid);
+            int _volumeid = -1;
+            if (_chapid != -1) {
+                var chapItem = await SFClient.Instance.GetChapContent(_chapid);
+                _volumeid = chapItem.VolumeID;
+            }
+            
+            if (((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).IsChatNovel)
+                NavigationService.Navigate(new ChatNovelViewer(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID, _volumeid, _chapid));
+            else
+                NavigationService.Navigate(new Bookviewer(((HotPushItem)((FrameworkElement)((FrameworkElement)e.Source).Parent).DataContext).NovelID, _volumeid, _chapid));
         }
     }
 }
